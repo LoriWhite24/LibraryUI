@@ -11,12 +11,12 @@ import java.util.List;
 
 import com.cognixia.jump.connection.ConnectionManager;
 
+import com.cognixia.jump.models.Book;
 
 
 
 
-
-public class UserDao {
+public class Userdao  {
 	
 	
 	public static final Connection conn = ConnectionManager.getConnection();
@@ -31,6 +31,8 @@ public class UserDao {
 	public List<Book> getAllBooks () {
 		
 		// create a list of books
+		
+		
 		List<Book> allBooks = new ArrayList<Book>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_BOOKS);
@@ -41,11 +43,11 @@ public class UserDao {
 				String isbn = rs.getString("isbn");
 				String title = rs.getString("title");
 				String descr = rs.getString("descr");
-				boolean rent = rs.getBoolean("rented");
-				Date addedToLibrary = rs.getDate("added_to_library");
+				boolean rented = rs.getBoolean("rented");
+				Date added_to_library = rs.getDate("added_to_library");
 				
 				
-				allBooks.add(new Book(isbn,title,descr,rent,addedToLibrary));
+				allBooks.add(new Book(isbn, title, descr, rented,added_to_library));
 			}
 			
 			

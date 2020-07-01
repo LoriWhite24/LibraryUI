@@ -7,10 +7,21 @@ public class Book {
 	
 	private String isbn;
 	private String title;
+	private String descr;
 	private boolean rented;
 	private Date added_to_library;
 	
 	
+	
+	
+	public Book(String isbn, String title, String descr, boolean rented, Date added_to_library) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.descr = descr;
+		this.rented = rented;
+		this.added_to_library = added_to_library;
+	}
 
 	public String getIsbn() {
 		return isbn;
@@ -43,19 +54,26 @@ public class Book {
 	public void setAdded_to_library(Date added_to_library) {
 		this.added_to_library = added_to_library;
 	}
-
-	public Book(String isbn, String title, boolean rented, Date added_to_library) {
-		super();
-		this.isbn = isbn;
-		this.title = title;
-		this.rented = rented;
-		this.added_to_library = added_to_library;
-	}
 	
+	
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
+
 	@Override
 	public String toString() {
-		return "Book [isbn=" + isbn + ", title=" + title + ", rented=" + rented + ", added_to_library="
-				+ added_to_library + "]";
+		return "Book [isbn=" + isbn + ", title=" + title + ", descr=" + descr + ", rented=" + rented
+				+ ", added_to_library=" + added_to_library + "]";
 	}
+	
+	
+
+	
+	
 
 }
