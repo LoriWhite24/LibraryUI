@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cognixia.jump.connection.ConnectionManager;
-
 import com.cognixia.jump.models.Book;
 
 
