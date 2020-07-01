@@ -25,6 +25,7 @@
   	<description></description>
   	<servlet-class>com.cognixia.jump.controllers.MainServlet</servlet-class>
   </servlet>
+
   
   <servlet-mapping>
   	<servlet-name>UserServlet</servlet-name>
@@ -36,8 +37,13 @@
   	<url-pattern>/LibrarianServlet</url-pattern>
   </servlet-mapping>
   
+
   <servlet-mapping>
   	<servlet-name>MainServlet</servlet-name>
   	<url-pattern>/MainServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Librarian</servlet-name>
+  	<url-pattern>/Librarian</url-pattern>
   </servlet-mapping>
 </web-app>
