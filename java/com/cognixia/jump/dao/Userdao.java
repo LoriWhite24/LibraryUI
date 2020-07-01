@@ -16,14 +16,6 @@ public class Userdao  {
 	public static final Connection conn = ConnectionManager.getConnection();
 	
 	
-	
-		
-	
-	// heh
-	
-	
 
-	
-	
 
 }
