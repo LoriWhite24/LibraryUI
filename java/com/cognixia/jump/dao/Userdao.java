@@ -23,10 +23,6 @@ public class Userdao  {
 	private static String SELECT_ALL_BOOKS = "select * from book";
 	
 	
-	
-	
-	
-	
 	public List<Book> getAllBooks () {
 		
 		// create a list of books

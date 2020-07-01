@@ -6,6 +6,7 @@ public class Book {
 
 	private String isbn;
 	private String title;
+
 	private String description;
 	private boolean rented;
 	private Date dateAddedLibrary;
@@ -16,6 +17,7 @@ public class Book {
 		this.description = des;
 		this.rented = rented;
 		this.dateAddedLibrary = add;
+
 	}
 
 	/**
@@ -46,9 +48,7 @@ public class Book {
 		this.title = title;
 	}
 
-	/**
-	 * @return the description
-	 */
+
 	public String getDescription() {
 		return description;
 	}
@@ -63,6 +63,7 @@ public class Book {
 	/**
 	 * @return the rented
 	 */
+
 	public boolean isRented() {
 		return rented;
 	}
@@ -88,9 +89,11 @@ public class Book {
 		this.dateAddedLibrary = dateAddedLibrary;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", description=" + description + ", rented=" + rented
 				+ ", dateAddedLibrary=" + dateAddedLibrary + "]";
+
 	}
 }
