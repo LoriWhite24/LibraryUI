@@ -6,11 +6,7 @@ public class Book {
 
 	private String isbn;
 	private String title;
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
 	private String description;
 	private boolean rented;
 	private Date dateAddedLibrary;
@@ -21,10 +17,7 @@ public class Book {
 		this.description = des;
 		this.rented = rented;
 		this.dateAddedLibrary = add;
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
 	}
 
 	/**
@@ -55,13 +48,7 @@ public class Book {
 		this.title = title;
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
-	/**
-	 * @return the description
-	 */
 	public String getDescription() {
 		return description;
 	}
@@ -76,10 +63,7 @@ public class Book {
 	/**
 	 * @return the rented
 	 */
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
 	public boolean isRented() {
 		return rented;
 	}
@@ -105,18 +89,11 @@ public class Book {
 		this.dateAddedLibrary = dateAddedLibrary;
 	}
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", description=" + description + ", rented=" + rented
 				+ ", dateAddedLibrary=" + dateAddedLibrary + "]";
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
 	}
 }

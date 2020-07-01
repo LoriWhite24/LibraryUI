@@ -25,34 +25,10 @@
   	<description></description>
   	<servlet-class>com.cognixia.jump.controllers.MainServlet</servlet-class>
   </servlet>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
-  
-  <servlet-mapping>
-  	<servlet-name>UserServlet</servlet-name>
-  	<url-pattern>/UserServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>LibrarianServlet</servlet-name>
-  	<url-pattern>/LibrarianServlet</url-pattern>
-  </servlet-mapping>
-  
-<<<<<<< HEAD
-=======
-
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
   <servlet-mapping>
   	<servlet-name>MainServlet</servlet-name>
   	<url-pattern>/MainServlet</url-pattern>
   </servlet-mapping>
-<<<<<<< HEAD
-=======
-  <servlet-mapping>
-  	<servlet-name>Librarian</servlet-name>
-  	<url-pattern>/Librarian</url-pattern>
-  </servlet-mapping>
->>>>>>> 4ec73127e2fd4d681d59c8dffc07d0e97b72ea12
+
 </web-app>
