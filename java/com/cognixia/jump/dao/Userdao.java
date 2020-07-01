@@ -2,15 +2,10 @@ package com.cognixia.jump.dao;
 
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import com.cognixia.jump.connection.ConnectionManager;
-import com.cognixia.jump.models.Book;
+
 
 
 
@@ -20,6 +15,7 @@ public class Userdao  {
 	
 	public static final Connection conn = ConnectionManager.getConnection();
 	
+<<<<<<< HEAD
 	private static String SELECT_ALL_BOOKS = "select * from book";
 	
 	
@@ -64,6 +60,9 @@ public class Userdao  {
 		
 	}
 	
+=======
+>>>>>>> 2eefaa10b0be8a9a17dda432ed9225db213df276
 	
+
 
 }
