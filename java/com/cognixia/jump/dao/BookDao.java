@@ -22,9 +22,9 @@ public boolean addBook(Book book) {
 		try(PreparedStatement bstmt = conn.prepareStatement(INSERT_BOOK)) {
 			
 			bstmt.setString(1, book.getTitle());
-			bstmt.setString(2, book.getDescr());
+			bstmt.setString(2, book.getDescription());
 			bstmt.setBoolean(3, book.isRented());
-			bstmt.setDate(4, book.getAdded_to_library());
+			bstmt.setDate(4, book.getDateAddedLibrary());
 			
 			// at least one row added
 		if(bstmt.executeUpdate() > 0) {
@@ -44,9 +44,9 @@ public boolean updateProduct(Book book) {
 
 		
 		bstmt.setString(1, book.getTitle());
-		bstmt.setString(2, book.getDescr());
+		bstmt.setString(2, book.getDescription());
 		bstmt.setBoolean(3, book.isRented());
-		bstmt.setDate(4, book.getAdded_to_library());
+		bstmt.setDate(4, book.getDateAddedLibrary());
 		// at least one row updated
 		if (bstmt.executeUpdate() > 0) {
 			return true;
