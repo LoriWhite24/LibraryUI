@@ -15,10 +15,11 @@ public class LibrarianDao {
 	public static final Connection conn = ConnectionManager.getConnection();
 	
 	private static String SELECT_ALL_LIBRARIANS = "select * from librarian";
-	private static String SELECT_LIBRARIAN_BY_ID = "select * from librarian where id = ?";
+	private static String SELECT_LIBRARIAN_BY_ID = "select * from librarian where librarian_id = ?";
+	private static String SELECT_LIBRARIAN_BY_NAME_AND_PASSWORD = "select * from librarian where username = ? and password = ?";
 	private static String INSERT_LIBRARIAN = "insert into librarian(username, password) values(?, ?)";
-	private static String DELETE_LIBRARIAN = "delete from librarian where id = ?";
-	private static String UPDATE_LIBRARIAN = "update librarian set username = ?, password = ? where id = ?";
+	private static String DELETE_LIBRARIAN = "delete from librarian where librarian_id = ?";
+	private static String UPDATE_LIBRARIAN = "update librarian set username = ?, password = ? where librarian_id = ?";
 	
 	public List<Librarian> getAllLibrarians() {
 		
@@ -30,7 +31,7 @@ public class LibrarianDao {
 			while(rs.next()) {
 				
 				int id = rs.getInt("librarian_id");
-				String name = rs.getString("username");;
+				String name = rs.getString("username");
 				String password = rs.getString("password");
 				allLibrarians.add(new Librarian(id, name, password));
 				
@@ -43,9 +44,36 @@ public class LibrarianDao {
 		return allLibrarians;
 	}
 	
+	public Librarian getLibrarianByNameAndPassword(String name, String password) {
+		
+		Librarian librarian = null;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_LIBRARIAN_BY_NAME_AND_PASSWORD)) {
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, password);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			// if product found, if statement run, if not null returned as product
+			if(rs.next()) {
+				int id = rs.getInt("librarian_id");
+				String username = rs.getString("username");
+				String pass = rs.getString("password");
+				
+				librarian = new Librarian(id, username, pass);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return librarian;
+	}
+	
 	public Librarian getLibrarianById(int id) {
 		
-		Librarian product = null;
+		Librarian librarian = null;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_LIBRARIAN_BY_ID)) {
 			
@@ -55,17 +83,17 @@ public class LibrarianDao {
 			
 			// if product found, if statement run, if not null returned as product
 			if(rs.next()) {
-				String name = rs.getString("name");
+				String name = rs.getString("username");
 				String password = rs.getString("password");
 				
-				product = new Librarian(id, name, password);
+				librarian = new Librarian(id, name, password);
 			}
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return product;
+		return librarian;
 	}
 
 	public boolean addLibrarian(Librarian librarian) {
@@ -106,7 +134,7 @@ public class LibrarianDao {
 		return false;
 	}
 	
-	public boolean updateProduct(Librarian librarian) {
+	public boolean updateLibrarian(Librarian librarian) {
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(UPDATE_LIBRARIAN)) {
 
