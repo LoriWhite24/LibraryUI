@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>com.cognixia.jump.controllers.MainServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Librarian</servlet-name>
+  	<display-name>Librarian</display-name>
+  	<description></description>
+  	<servlet-class>com.cognixia.jump.controllers.Librarian</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>MainServlet</servlet-name>
   	<url-pattern>/MainServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Librarian</servlet-name>
+  	<url-pattern>/Librarian</url-pattern>
   </servlet-mapping>
 </web-app>
