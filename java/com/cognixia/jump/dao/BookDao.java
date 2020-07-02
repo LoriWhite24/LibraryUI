@@ -20,6 +20,7 @@ public class BookDao {
 	private static String UPDATE_BOOK = "update book set title = ?, descr = ?, rented = ?, added_to_library = ? where isbn = ?";
 	private static String SELECT_BOOK_BY_ISBN = "select * from book where isbn = ?";
 	private static String SELECT_ALL_BOOKS = "select * from book";
+	private static String SELECT_AVAILABLE_BOOKS = "select * from book where rented = 0";
 
 	public Book getBookByISBN(String isbn) {
 
@@ -126,28 +127,23 @@ public class BookDao {
 		}
 		return allBooks;
 	}
-
-	public boolean checkoutBook(BookCheckout checkout_book) {
-
-		try (PreparedStatement checkout_update_stmt = conn.prepareStatement(UPDATE_BOOK))
-		//PreparedStatement book_update_stmt = conn.prepareStatement(UPDATE_BOOK))
-				{
-		// TODO we can also check if we the book is rented or not here.
-		// book_update_stmt.setBoolean(3, book.isRented());
-
-		checkout_update_stmt.setDate(4, checkout_book.getCheckOut());
-		checkout_update_stmt.setDate(5, checkout_book.getDueDate());
-		checkout_update_stmt.setDate(6, checkout_book.getReturned());
-
-		// at least one row added
-		if (checkout_update_stmt.executeUpdate() > 0) {
-		return true;
-		}
-
+	
+	public List<Book> getAvailableBooks() {
+		// create a list of books
+		List<Book> allBooks = new ArrayList<Book>();
+		try (PreparedStatement pstmt = conn.prepareStatement(SELECT_AVAILABLE_BOOKS); ResultSet rs = pstmt.executeQuery()) {
+			while (rs.next()) {
+				String isbn = rs.getString("isbn");
+				String title = rs.getString("title");
+				String descr = rs.getString("descr");
+				boolean rented = rs.getBoolean("rented");
+				Date added_to_library = rs.getDate("added_to_library");
+				allBooks.add(new Book(isbn, title, descr, rented, added_to_library));
+			}
 		} catch (SQLException e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
+		return allBooks;
+	}
 
-		return false;
-		}
 }
