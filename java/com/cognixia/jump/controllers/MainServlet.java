@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cognixia.jump.connection.ConnectionManager;
 import com.cognixia.jump.dao.*;
@@ -22,15 +23,13 @@ import com.cognixia.jump.models.User;
 public class MainServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 275L;
-	Userdao userdao;
-	LibrarianDao librarianDao;
+	private Userdao userdao;
+	private LibrarianDao librarianDao;
 
 	
 	public void init() {
 		 userdao = new Userdao();
 		 librarianDao = new LibrarianDao();
-		
-		
 	}
 
 
@@ -92,20 +91,27 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("user");
 		String password = request.getParameter("pwd");
+		String destPage = "login.jsp";
 		Librarian librarian = librarianDao.getLibrarianByNameAndPassword(username, password);
 		User user = userdao.getPatronByPasswordAndUsername(username, password);
+		HttpSession session = request.getSession();
 		if(librarian != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("librarian-menu.jsp");
-			dispatcher.forward(request, response);
+			session.setAttribute("user", librarian);
+			destPage = "librarian-menu.jsp";
+			request.setAttribute("message", "");
 		} else if(user != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("user-menu.jsp");
-			dispatcher.forward(request, response);
+			session.setAttribute("user", user);
+			destPage = "user-menu.jsp";
+			request.setAttribute("message", "");
 		}
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("add-librarian.jsp");
-			dispatcher.forward(request, response);
-			
-	    } 
+			String message = "Invalid username/password";
+			request.setAttribute("message", message);
+		} 
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+		dispatcher.forward(request, response);
+		
 	}
 	
 	
