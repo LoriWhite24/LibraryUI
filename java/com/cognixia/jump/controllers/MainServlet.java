@@ -14,18 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cognixia.jump.connection.ConnectionManager;
 import com.cognixia.jump.dao.*;
+import com.cognixia.jump.models.Librarian;
 
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 275L;
-	PatronDao patronDao;
+	Userdao userdao;
 	LibrarianDao librarianDao;
 
 	
 	public void init() {
-		 patronDao = new PatronDao();
+		 userdao = new Userdao();
 		 librarianDao = new LibrarianDao();
 		
 		
@@ -104,7 +105,7 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String user = request.getParameter("user");
 		String password = request.getParameter("pwd");
-		if(librarianDao.getLibrarianByPasswordandUsername(user, password)!=null) {
+		if(librarianDao.getLibrarianByNameAndPassword(user, password)!=null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("librarian-menu.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -120,7 +121,7 @@ public class MainServlet extends HttpServlet {
 		String user = request.getParameter("user").trim();
 		String password = request.getParameter("pwd").trim();
 
-		if(patronDao.getPatronByPasswordandUsername(user, password)) {
+		if(userdao.getPatronByPasswordAndUsername(user, password)!=null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("patron-menu.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -137,7 +138,7 @@ public class MainServlet extends HttpServlet {
 		String lastname = request.getParameter("lname");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		patronDao.addPatron(firstname, lastname, username, password);
+		userdao.addPatron(firstname, lastname, username, password);
 		response.sendRedirect("PatronLogin");
 		
 		
@@ -146,7 +147,7 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		librarianDao.addLibrarian(username, password);
+		librarianDao.addLibrarian(new Librarian(0, username, password));
 		response.sendRedirect("LibrarianLogin");
 
 	
