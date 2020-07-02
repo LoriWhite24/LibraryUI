@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User Login</title>
+<title>Patron Menu</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -13,11 +13,10 @@
 <body>
 
 <header class="container">
-<nav class="nav">
-  <a class="nav-link active" href="<%= request.getContextPath() %>/">Home</a>
-  <a class="nav-link" href="<%= request.getContextPath() %>/PatronLogin">Patron Login</a>
-  <a class="nav-link" href="<%= request.getContextPath() %>/LibrarianLogin">Librarian Login</a>
-</nav>
+<button type="button" href="<%= request.getContextPath() %>/CheckoutBooks" > Checkout Books</button>
+<button type="button" href="<%= request.getContextPath() %>/ReturnBooks" > Return Books</button>
+<button type="button" href="<%= request.getContextPath() %>/ViewmyBooks" > View All Books</button>
+<button type="button" href="<%= request.getContextPath() %>/ListofBooks" > List of all Books</button>
 </header>
 
 
