@@ -1,22 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Patron Menu</title>
+<%@ include file="header.jsp" %>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-</head>
 <body>
 
-<header class="container">
-<button type="button" href="<%= request.getContextPath() %>/CheckoutBooks" > Checkout Books</button>
-<button type="button" href="<%= request.getContextPath() %>/ReturnBooks" > Return Books</button>
-<button type="button" href="<%= request.getContextPath() %>/ViewmyBooks" > View All Books</button>
-<button type="button" href="<%= request.getContextPath() %>/ListofBooks" > List of all Books</button>
-</header>
+<div class="container">
+	<h1>Librarian Menu</h1>
+	<br>
+	<br>
+	
+<button class="btn btn-primary" type="button" href="<%= request.getContextPath() %>/add">Add New Books</button>
+	
+	
+	<table class="table table-striped">
+	
+		<thead>
+			<tr>
+				<th>ISBN</th>
+				<th>Book title</th>
+				<th>Description</th>
+				<th>Availability</th>
+				<th>Date added to Library</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<c:forEach var="book" items="${ allBooks }">
+				<tr>
+					<td><c:out value="${ book.isbn }" /></td>
+					
+					<td><c:out value="${ book.title }" /></td>
+					
+					<td><c:out value="${ book.description }" /></td>
+					
+					<td><c:out value="${ book.rent }" /></td>
+					
+					<td><c:out value="${ book.date }" /></td>
+					
+					<td><a class="btn btn-primary" href="edit?id=<c:out value='${ book.isbn }' />" >Checkout books</a>
+					<a class="btn btn-danger" href="delete?id=<c:out value='${ book.isbn }' />">Return book</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	
+	</table>
 
 
+</div>
+
+</body>
