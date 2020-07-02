@@ -21,6 +21,7 @@ public class Userdao  {
 	public static final Connection conn = ConnectionManager.getConnection();
 
 	private static String DELETE_PATRON = "delete from patron where patron_id = ?";
+	private static String DELETE_PATRON_FROM_BOOK_CHECKOUT = "delete from book_checkout where patron_id = ?";
 	private static String UPDATE_PATRON = "update patron set first_name = ?, last_name = ?, username = ?, password = ? where patron_id = ?";
 	private static String SELECT_ALL_PATRONS = "select * from patron";
 	private static String SELECT_PATRON_BY_ID = "select * from patron where password = ? and username = ?";
@@ -96,20 +97,37 @@ public class Userdao  {
 	}
 	
 	public boolean deletePatron(int patron_id) {
+		boolean del = false;
 		
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(DELETE_PATRON)) {
-			
+		try(PreparedStatement pstmt = conn.prepareStatement(DELETE_PATRON_FROM_BOOK_CHECKOUT)) {
 			pstmt.setInt(1, patron_id);
-			
-			if(pstmt.executeUpdate() > 0) {
-				return true;
+
+			int deleted = pstmt.executeUpdate();
+
+			if(deleted > 0) {
+				del = true;
 			}
+			pstmt.close();
 			
-		} catch (SQLException e){
+		} catch(SQLException e) {
 			
 			e.printStackTrace();
-			
+		}
+		
+		if(del) {
+			try (PreparedStatement pstmt = conn.prepareStatement(DELETE_PATRON)) {
+
+				pstmt.setInt(1, patron_id);
+
+				if(pstmt.executeUpdate() > 0) {
+					return true;
+				}
+
+			} catch (SQLException e){
+
+				e.printStackTrace();
+
+			}
 		}
 		
 		return false;
