@@ -28,7 +28,7 @@ public class User  {
 		return patron_id;
 	}
 
-	public void setId(int id) {
+	public void setId(int patron_id) {
 		this.patron_id = patron_id;
 	}
 
