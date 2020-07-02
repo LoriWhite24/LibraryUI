@@ -1,5 +1,5 @@
 
-<%@ include file="header.jsp" %>
+
 
 <div class="container">
 	
@@ -7,5 +7,5 @@
 
 </div>
 
-
+<%@ include file="header.jsp" %>
 <%@ include file="footer.jsp" %>
