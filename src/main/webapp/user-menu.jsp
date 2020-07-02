@@ -3,11 +3,9 @@
 <body>
 
 <div class="container">
-	<h1>Librarian Menu</h1>
+	<h1>Patron Menu</h1>
 	<br>
 	<br>
-	
-<button class="btn btn-primary" type="button" href="<%= request.getContextPath() %>/add">Add New Books</button>
 	
 	
 	<table class="table table-striped">

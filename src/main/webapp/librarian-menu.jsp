@@ -41,7 +41,7 @@
 					<td><c:out value="${ book.date }"/></td>
 					<td>
 						<a class="btn btn-primary" href="edit?id=<c:out value='${ book.isbn }' />" >Edit</a>
-						<a class="btn btn-danger" href="thankyou?id=<c:out value='${ book.isbn }' />">Return book</a>
+						<!--  <a class="btn btn-danger" href="thankyou?id=<c:out value='${ book.isbn }' />">Return book</a>-->
 					</td>
 				</tr>
 			</c:forEach>
