@@ -62,10 +62,10 @@ public class MainServlet extends HttpServlet {
 		case "/Authentication":
 			authentication(request, response);
 			break;
-		case "/addPatron":
+		case "/AddPatron":
 			addPatron(request, response);
 			break;
-		case "/addLibrarian":
+		case "/AddLibrarian":
 			addLibrarian(request, response);
 			break;
 			
@@ -81,7 +81,7 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -91,7 +91,7 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("user");
 		String password = request.getParameter("pwd");
-		String destPage = "login.jsp";
+		String destPage = "index.jsp";
 		Librarian librarian = librarianDao.getLibrarianByNameAndPassword(username, password);
 		User user = userdao.getPatronByPasswordAndUsername(username, password);
 		HttpSession session = request.getSession();
@@ -117,22 +117,23 @@ public class MainServlet extends HttpServlet {
 	
 	private void addPatron(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String firstname = request.getParameter("fname");
-		String lastname = request.getParameter("lname");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		String username = request.getParameter("user");
+		String password = request.getParameter("pwd");
 		userdao.addPatron(firstname, lastname, username, password);
-		response.sendRedirect("PatronLogin");
+		response.sendRedirect("Login");
 		
 		
 	}
 	private void addLibrarian(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String username = request.getParameter("user");
+		String password = request.getParameter("pwd");
 		librarianDao.addLibrarian(new Librarian(0, username, password));
-		response.sendRedirect("LibrarianLogin");
+		response.sendRedirect("Login");
 
 	
 	}
+	
 }
