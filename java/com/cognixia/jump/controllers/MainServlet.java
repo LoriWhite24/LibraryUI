@@ -87,7 +87,7 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patron-login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-login.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -122,11 +122,11 @@ public class MainServlet extends HttpServlet {
 		String password = request.getParameter("pwd").trim();
 
 		if(userdao.getPatronByPasswordAndUsername(user, password)!=null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("patron-menu.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("user-menu.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("add-Patron.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("add-user.jsp");
 			dispatcher.forward(request, response);
 	    }
 		
