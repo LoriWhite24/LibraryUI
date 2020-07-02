@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cognixia.jump.connection.ConnectionManager;
+import com.cognixia.jump.models.Librarian;
 import com.cognixia.jump.models.User;
 
 
@@ -22,9 +23,10 @@ public class Userdao  {
 
 	private static String DELETE_PATRON = "delete from patron where patron_id = ?";
 	private static String DELETE_PATRON_FROM_BOOK_CHECKOUT = "delete from book_checkout where patron_id = ?";
+	private static String SELECT_PATRON_BY_ID = "select * from patron where patron_id = ?";
 	private static String UPDATE_PATRON = "update patron set first_name = ?, last_name = ?, username = ?, password = ? where patron_id = ?";
 	private static String SELECT_ALL_PATRONS = "select * from patron";
-	private static String SELECT_PATRON_BY_ID = "select * from patron where password = ? and username = ?";
+	private static String SELECT_PATRON_BY_NAME_AND_PASSWORD = "select * from patron where username = ? and password = ?";
 	private static String INSERT_PATRON = "insert into patron(first_name, last_name, username, password, account_frozen) values(?, ?, ?, ?, ?)";
 
 	public List<User> getAllPatrons() {
@@ -56,7 +58,7 @@ public class Userdao  {
 	public User getPatronByPasswordAndUsername(String username, String password) {
 		
 		User user = null;
-		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_PATRON_BY_ID)) {
+		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_PATRON_BY_NAME_AND_PASSWORD)) {
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 			
@@ -75,6 +77,29 @@ public class Userdao  {
 		
 		
 	}
+	
+	public User getPatronById(int id) {
+		
+		User user = null;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_PATRON_BY_ID)) {
+			
+			pstmt.setInt(1, id);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			// if product found, if statement run, if not null returned as product
+			if(rs.next()) {
+				user = new User(rs.getInt("patron_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("username"), rs.getLong("password"), rs.getBoolean("account_frozen"));
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
 	public boolean addPatron(String firstname, String lastname, String username, String password) {
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(INSERT_PATRON)) {
