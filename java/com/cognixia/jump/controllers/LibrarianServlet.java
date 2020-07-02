@@ -1,45 +1,56 @@
-
-package com.cognixia.jump.controllers;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.cognixia.jump.connection.ConnectionManager;
 import com.cognixia.jump.dao.BookDao;
 import com.cognixia.jump.models.Book;
 
-public class LibrarianServlet extends HttpServlet {
 
+public class LibrarianServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1612661432892920935L;
 	private BookDao bookDao;
-
+	
+	
+	
+	
+	
+	
+	
 	public void init() {
 		bookDao = new BookDao();
 	}
-
+	
+	
+	
 	public void destroy() {
-
 		try {
 			ConnectionManager.getConnection().close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		doGet(request, response);
 	}
-
+	
+	
+	
+	
+	
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getServletPath();
@@ -63,15 +74,17 @@ public class LibrarianServlet extends HttpServlet {
 		case "/add":
 			addNewBook(request, response);
 			break;
-
 		default:
-
 			response.sendRedirect("/");
 			break;
 		}
 	}
 	
-	private void listBooks(HttpServletRequest request, HttpServletResponse response) 
+	
+	
+	
+	
+	private void listBooks(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		List<Book> allBooks = bookDao.getAllBooks();
@@ -83,8 +96,13 @@ public class LibrarianServlet extends HttpServlet {
 		
 		dispatcher.forward(request, response);
 	}
-
-
+	
+	
+	
+	
+	
+	
+	
 	private void addNewBook(HttpServletRequest request, HttpServletResponse response) {
 		
 		String isbn = request.getParameter("isbn").trim();
@@ -92,9 +110,7 @@ public class LibrarianServlet extends HttpServlet {
 		String des = request.getParameter("des").trim();
 		boolean rented = Boolean.parseBoolean(request.getParameter("rented").trim());
 		//Date add = Date.valueOf("add");
-
 		Book book = new Book(isbn, title, des, rented, null);
-
 		bookDao.addBook(book);
 		
 		// redirect to our list products page once we finish updating info on product
@@ -104,11 +120,12 @@ public class LibrarianServlet extends HttpServlet {
 			
 			e.printStackTrace();
 		}
-
-
 		
 	}
-
+	
+	
+	
+	
 	private void updateBook(HttpServletRequest request, HttpServletResponse response) {
 		// grab info to do update for product submitted by form
 		int isbn = Integer.parseInt(request.getParameter("isbn").trim());
@@ -126,5 +143,4 @@ public class LibrarianServlet extends HttpServlet {
 		//response.sendRedirect("list");
 		
 	}
-
 }
