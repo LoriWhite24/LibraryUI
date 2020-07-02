@@ -33,8 +33,18 @@
 			<br><span style="color:red;"> ${ message } </span>
 			<br><br>
 			<input type="submit" value="Login" class="btn btn-primary">
+			 <input type="button" value="sign-up" name="sign-up"
+    			onclick="openPage('librarian-user-signup.jsp')"/>
+    			
+    		<script type="text/javascript">
+ 				function openPage(pageURL)
+ 					{
+ 						window.location.href = pageURL;
+					 }
+			</script>
 			
 			<script type="text/javascript">
+			
 		
 				$(document).ready(function() {
 					$("#loginForm").validate({
