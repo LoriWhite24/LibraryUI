@@ -2,7 +2,7 @@ package com.cognixia.jump.models;
 
 public class User  {
 	
-	private int id;
+	private int patron_id;
 	
 	private String first_name;
 	
@@ -14,9 +14,9 @@ public class User  {
 	
 	boolean accountFrozen;
 
-	public User(int id, String first_name, String last_name, String userName, long password, boolean accountFrozen) {
+	public User(int patron_id, String first_name, String last_name, String userName, long password, boolean accountFrozen) {
 		
-		this.id = id;
+		this.patron_id = patron_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.userName = userName;
@@ -25,11 +25,11 @@ public class User  {
 	}
 
 	public int getId() {
-		return id;
+		return patron_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.patron_id = patron_id;
 	}
 
 	public String getFirst_name() {
@@ -74,7 +74,7 @@ public class User  {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", userName=" + userName
+		return "User [id=" + patron_id + ", first_name=" + first_name + ", last_name=" + last_name + ", userName=" + userName
 				+ ", password=" + password + ", accountFrozen=" + accountFrozen + "]";
 	}
 	
