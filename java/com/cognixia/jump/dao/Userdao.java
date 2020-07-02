@@ -16,6 +16,7 @@ public class Userdao  {
 	
 	
 	public static final Connection conn = ConnectionManager.getConnection();
+
 	private static String DELETE_PATRON = "delete from patron where patron_id = ?";
 	private static String UPDATE_PATRON = "update patron set first_name = ?, last_name = ?, username = ?, password = ? where patron_id = ?";
 
@@ -67,11 +68,6 @@ public class Userdao  {
 		return false;
 		
 	}
-	
-	
-	
-	
-	
 	
 	
 	
