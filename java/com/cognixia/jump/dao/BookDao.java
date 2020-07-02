@@ -18,6 +18,7 @@ public class BookDao {
 	
 	private static String INSERT_BOOK = "insert into book(isbn, title, descr, rented, added_to_library) values(?, ?, ?, ?, current_date())";
 	private static String DELETE_BOOK = "delete from book where isbn = ?";
+	private static String DELETE_BOOK_FROM_BOOK_CHECKOUT = "delete from book_checkout where isbn = ?";
 	private static String UPDATE_BOOK = "update book set title = ?, descr = ?, rented = ?, added_to_library = ? where isbn = ?";
 	private static String SELECT_BOOK_BY_ISBN = "select * from book where isbn = ?";
 	private static String SELECT_ALL_BOOKS = "select * from book";
@@ -93,20 +94,37 @@ public class BookDao {
 	}
 
 	public boolean deleteBook(String isbn) {
+		boolean del = false;
 
-		try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOK)) {
-
+		try(PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOK_FROM_BOOK_CHECKOUT)) {
 			pstmt.setString(1, isbn);
 
-			// at least one row deleted
-			if (pstmt.executeUpdate() > 0) {
-				return true;
-			}
+			int deleted = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
+			if(deleted > 0) {
+				del = true;
+			}
+			pstmt.close();
+
+		} catch(SQLException e) {
+
 			e.printStackTrace();
 		}
-		
+
+		if(del) {
+			try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOK)) {
+
+				pstmt.setString(1, isbn);
+
+				// at least one row deleted
+				if (pstmt.executeUpdate() > 0) {
+					return true;
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return false;
 	}

@@ -1,3 +1,4 @@
+
 package com.cognixia.jump.dao;
 
 import java.sql.Connection;
@@ -101,7 +102,7 @@ public class LibrarianDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(INSERT_LIBRARIAN)) {
 			
 			pstmt.setString(1, librarian.getUsername());
-			pstmt.setString(3, librarian.getPassword());
+			pstmt.setString(2, librarian.getPassword());
 			
 			// at least one row added
 			if(pstmt.executeUpdate() > 0) {

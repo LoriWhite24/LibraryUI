@@ -1,19 +1,18 @@
+
 package com.cognixia.jump.controllers;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
-import javax.servlet.ServletConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cognixia.jump.connection.ConnectionManager;
 import com.cognixia.jump.dao.BookDao;
-//import com.cognixia.jump.model.Product;
 import com.cognixia.jump.models.Book;
 
 public class LibrarianServlet extends HttpServlet {
@@ -44,7 +43,9 @@ public class LibrarianServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getServletPath();
-
+		
+		listBooks(request, response);
+		
 		switch (action) {
 		
 //		case "/delete":
@@ -69,6 +70,20 @@ public class LibrarianServlet extends HttpServlet {
 			break;
 		}
 	}
+	
+	private void listBooks(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		List<Book> allBooks = bookDao.getAllBooks();
+		//System.out.println("allProducts = " + allProducts);
+		
+		request.setAttribute("allProducts", allBooks);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("books.jsp");
+		
+		dispatcher.forward(request, response);
+	}
+
 
 	private void addNewBook(HttpServletRequest request, HttpServletResponse response) {
 		
