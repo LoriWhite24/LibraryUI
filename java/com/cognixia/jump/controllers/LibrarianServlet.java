@@ -90,7 +90,7 @@ public class LibrarianServlet extends HttpServlet {
 		List<Book> allBooks = bookDao.getAllBooks();
 		//System.out.println("allProducts = " + allProducts);
 		
-		request.setAttribute("allProducts", allBooks);
+		request.setAttribute("allBooks", allBooks);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("books.jsp");
 		
