@@ -24,24 +24,24 @@
 		<tbody>
 			<c:forEach var="book" items="${ allBooks }">
 				<tr>
-					<td>
-						<c:out value="${ book.isbn }" />
-					</td>
-					<td>
-						<c:out value="${ book.title }" />
-					</td>
-					<td>
-						<c:out value="${ book.description }" />
-					</td>
-					<td>
-						<c:out value="${ book.rent }" />
-					</td>
-					<td>
-						<c:out value="${ book.date }" />
-					</td>
+					<td><c:out value="${ book.isbn }" /></td>
+					
+					<td><c:out value="${ book.title }" /></td>
+					
+					<td><c:out value="${ book.description }" /></td>
+				<c:choose>
+					<c:when test="${ book.rented }">
+						<td>Checked out</td>
+					</c:when>
+					<c:otherwise>
+						<td style="color: green">Available</td>
+					</c:otherwise>
+				</c:choose>
+					
+					<td><c:out value="${ book.date }"/></td>
 					<td>
 						<a class="btn btn-primary" href="edit?id=<c:out value='${ book.isbn }' />" >Edit</a>
-						<!--  -<a class="btn btn-danger" href="delete?id=<c:out value='${ book.isbn }' />">Delete</a> -->
+						<a class="btn btn-danger" href="thankyou?id=<c:out value='${ book.isbn }' />">Return book</a>
 					</td>
 				</tr>
 			</c:forEach>
