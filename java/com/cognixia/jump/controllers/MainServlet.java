@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cognixia.jump.connection.ConnectionManager;
 import com.cognixia.jump.dao.*;
 import com.cognixia.jump.models.Librarian;
+import com.cognixia.jump.models.User;
 
 
 @WebServlet("/")
@@ -56,17 +57,11 @@ public class MainServlet extends HttpServlet {
 		String action = request.getServletPath();
 		
 		switch (action) {
-		case "/PatronLogin":
-			patronLogin(request, response);
+		case "/Login":
+			login(request, response);
 			break;
-		case "/LibrarianLogin":
-			librarianLogin(request, response);
-			break;
-		case "/AuthenticationLibrarian":
-			authenticationLibrarian(request, response);
-			break;
-		case "/AuthenticationPatron":
-			authenticationPatron(request, response);
+		case "/Authentication":
+			authentication(request, response);
 			break;
 		case "/addPatron":
 			addPatron(request, response);
@@ -83,54 +78,36 @@ public class MainServlet extends HttpServlet {
 			
 	}
 	
-	private void patronLogin(HttpServletRequest request, HttpServletResponse response) 
+	private void login(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
 	}
-	
 
-	private void librarianLogin(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("librarian-login.jsp");
-		dispatcher.forward(request, response);
-	}
 	
 	
-	private void authenticationLibrarian(HttpServletRequest request, HttpServletResponse response) 
+	private void authentication(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		String user = request.getParameter("user");
+		String username = request.getParameter("user");
 		String password = request.getParameter("pwd");
-		if(librarianDao.getLibrarianByNameAndPassword(user, password)!=null) {
+		Librarian librarian = librarianDao.getLibrarianByNameAndPassword(username, password);
+		User user = userdao.getPatronByPasswordAndUsername(username, password);
+		if(librarian != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("librarian-menu.jsp");
+			dispatcher.forward(request, response);
+		} else if(user != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("user-menu.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("add-Librarian.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("add-librarian.jsp");
 			dispatcher.forward(request, response);
 			
 	    } 
 	}
 	
-	private void authenticationPatron(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		String user = request.getParameter("user").trim();
-		String password = request.getParameter("pwd").trim();
-
-		if(userdao.getPatronByPasswordAndUsername(user, password)!=null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("user-menu.jsp");
-			dispatcher.forward(request, response);
-		}
-		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("add-user.jsp");
-			dispatcher.forward(request, response);
-	    }
-		
-	}
 	
 	private void addPatron(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
