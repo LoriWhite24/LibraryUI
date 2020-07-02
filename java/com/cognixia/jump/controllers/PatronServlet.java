@@ -16,7 +16,7 @@ import com.cognixia.jump.models.User;
 
 
 @WebServlet("/")
-public class UserServlet extends HttpServlet {
+public class PatronServlet extends HttpServlet {
 	
 	
 	
