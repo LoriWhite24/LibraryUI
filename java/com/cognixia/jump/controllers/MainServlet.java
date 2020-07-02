@@ -104,7 +104,7 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String user = request.getParameter("user");
 		String password = request.getParameter("pwd");
-		if(librarianDao.getLibrarianByPasswordandUsername(user, password)) {
+		if(librarianDao.getLibrarianByPasswordandUsername(user, password)!=null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("librarian-menu.jsp");
 			dispatcher.forward(request, response);
 		}
