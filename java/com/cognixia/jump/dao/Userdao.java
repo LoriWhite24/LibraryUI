@@ -2,9 +2,11 @@ package com.cognixia.jump.dao;
 
 
 import java.sql.Connection;
-
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import com.cognixia.jump.connection.ConnectionManager;
+import com.cognixia.jump.models.User;
 
 
 
@@ -14,54 +16,64 @@ public class Userdao  {
 	
 	
 	public static final Connection conn = ConnectionManager.getConnection();
-	
-<<<<<<< HEAD
-	private static String SELECT_ALL_BOOKS = "select * from book";
-	
-	
-	
+	private static String DELETE_PATRON = "delete from patron where patron_id = ?";
+	private static String UPDATE_PATRON = "update patron set first_name = ?, last_name = ?, username = ?, password = ? where patron_id = ?";
+
+
 	
 	
-	
-	
-	
-	
-	
-	
-	public List<Book> getAllBooks () {
-		
-		// create a list of books
+	public boolean deletePatron(int patron_id) {
 		
 		
-		List<Book> allBooks = new ArrayList<Book>();
-		
-		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_BOOKS);
-				ResultSet rs = pstmt.executeQuery() ) {
+		try (PreparedStatement pstmt = conn.prepareStatement(DELETE_PATRON)) {
 			
-			while(rs.next()) {
-				
-				String isbn = rs.getString("isbn");
-				String title = rs.getString("title");
-				String descr = rs.getString("descr");
-				boolean rented = rs.getBoolean("rented");
-				Date added_to_library = rs.getDate("added_to_library");
-				
-				
-				allBooks.add(new Book(isbn, title, descr, rented,added_to_library));
+			pstmt.setInt(1, patron_id);
+			
+			if(pstmt.executeUpdate() > 0) {
+				return true;
 			}
 			
-			
-		} catch(SQLException e) {
+		} catch (SQLException e){
 			
 			e.printStackTrace();
+			
 		}
 		
-		return allBooks;
+		return false;
+	}
+	
+	
+	
+	
+	public boolean updatePatron (User patron) {
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(UPDATE_PATRON)) {
+			
+			pstmt.setString(1, patron.getFirst_name());
+			pstmt.setString(2, patron.getLast_name());
+			pstmt.setString(3, patron.getUserName());
+			pstmt.setLong(4, patron.getPassword());
+			
+			if (pstmt.executeUpdate() > 0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return false;
 		
 	}
 	
-=======
->>>>>>> 2eefaa10b0be8a9a17dda432ed9225db213df276
+	
+	
+	
+	
+	
+	
 	
 
 
