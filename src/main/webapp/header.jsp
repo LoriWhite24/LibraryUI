@@ -10,9 +10,7 @@
 </head>
 <header class="container">
 <nav class="nav">
-  <a class="nav-link active" href="<%= request.getContextPath() %>/">Home</a>
-  <a class="nav-link" href="<%= request.getContextPath() %>/">Patron</a>
-  <a class="nav-link" href="<%= request.getContextPath() %>/">Librarian</a>
-  <a class="nav-link" href="<%= request.getContextPath() %>/">Catalog</a>
+  <a class="nav-link active" href="<%= request.getContextPath() %>/Login">Login</a>
+  
 </nav>
 </header>

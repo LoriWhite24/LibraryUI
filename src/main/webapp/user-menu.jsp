@@ -7,7 +7,6 @@
 	<br>
 	<br>
 	
-<button class="btn btn-primary" type="button" href="<%= request.getContextPath() %>/add">Add New Books</button>
 	
 	
 	<table class="table table-striped">
@@ -44,7 +43,8 @@
 	
 	</table>
 
-
+	<button class="btn btn-primary" type="button" href="<%= request.getContextPath() %>/">Check Out Book</button>
+	
 </div>
 
 </body>

@@ -2,6 +2,7 @@ package com.cognixia.jump.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import com.cognixia.jump.connection.ConnectionManager;
 import com.cognixia.jump.dao.BookCheckoutDao;
 import com.cognixia.jump.dao.BookDao;
 import com.cognixia.jump.dao.Userdao;
+import com.cognixia.jump.models.Book;
 import com.cognixia.jump.models.BookCheckout;
 import com.cognixia.jump.models.User;
 
@@ -143,14 +145,14 @@ public class PatronServlet extends HttpServlet {
 
 
 	private void getHistory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		List<BookCheckout> history = bookCheckoutdao.getHistory(user.getId());
+		request.setAttribute("history", history);
 	}
 
 
 	private void getAvailableBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+			List<Book> allBooks = bookdao.getAvailableBooks();
+			request.setAttribute("allBooks", allBooks);
 	}
 
 
