@@ -1,6 +1,6 @@
 package com.cognixia.jump.models;
 
-public class User  {
+public class Patron  {
 	
 	private int id;
 	
@@ -14,7 +14,7 @@ public class User  {
 	
 	boolean accountFrozen;
 
-	public User(int id, String first_name, String last_name, String userName, long password, boolean accountFrozen) {
+	public Patron(int id, String first_name, String last_name, String userName, long password, boolean accountFrozen) {
 		
 		this.id = id;
 		this.first_name = first_name;

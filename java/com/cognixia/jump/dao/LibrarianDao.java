@@ -67,13 +67,36 @@ public class LibrarianDao {
 		
 		return product;
 	}
+	
+public boolean getLibrarianByPasswordandUsername(String username, String password) {
+		
+		boolean bool = false;
+		try(PreparedStatement pstmt = conn.prepareStatement(SELECT_LIBRARIAN_BY_ID)) {
+			pstmt.setString(2, username);
+			pstmt.setString(3, password);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			// if product found, if statement run, if not null returned as product
+			if(rs.next()) {
+				bool = true;
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return bool;
+		
+		
+	}
 
-	public boolean addLibrarian(Librarian librarian) {
+	public boolean addLibrarian(String username, String password) {
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(INSERT_LIBRARIAN)) {
 			
-			pstmt.setString(1, librarian.getUsername());
-			pstmt.setString(3, librarian.getPassword());
+			pstmt.setString(1 , username);
+			pstmt.setString(2, password);
 			
 			// at least one row added
 			if(pstmt.executeUpdate() > 0) {
