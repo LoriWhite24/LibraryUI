@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserServlet
  */
-public class UserServlet extends HttpServlet {
+public class PatronServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
 	
 	
 	
-    public UserServlet() {
+    public PatronServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
