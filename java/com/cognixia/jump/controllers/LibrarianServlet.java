@@ -94,7 +94,7 @@ public class LibrarianServlet extends HttpServlet {
 		
 		request.setAttribute("allBooks", allBooks);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("books.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("librarian-menu.jsp");
 		
 		dispatcher.forward(request, response);
 	}
