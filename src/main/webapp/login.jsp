@@ -19,11 +19,11 @@
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<h1 class="display-4">Login</h1>
-				<p class="lead">Please enter your username and password below.</p>
+				<p class="lead">Please enter your user-name and password below.</p>
 			</div>
 		</div>
 		<form action="Authentication" method="post">
-			<label>Username</label>
+			<label>User-name</label>
 			&nbsp;&nbsp;
 			<input type="text" id="user" name="user">
 			<br><br>
