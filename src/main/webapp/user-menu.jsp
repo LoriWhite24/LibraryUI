@@ -7,8 +7,6 @@
 	<br>
 	<br>
 	
-	
-	
 	<table class="table table-striped">
 	
 		<thead>
@@ -30,12 +28,10 @@
 					
 					<td><c:out value="${ book.description }" /></td>
 					
-					<td><c:out value="${ book.rented }" /></td>
-					
 					<td><c:out value="${ book.dateAddedLibrary }" /></td>
 					
 					<td><a class="btn btn-primary" href="edit?id=<c:out value='${ book.isbn }' />" >Checkout books</a>
-					<a class="btn btn-danger" href="delete?id=<c:out value='${ book.isbn }' />">Return book</a>
+					<a class="btn btn-danger" href="thankyou?id=<c:out value='${ book.isbn }' />">Return book</a>
 					</td>
 				</tr>
 			</c:forEach>
