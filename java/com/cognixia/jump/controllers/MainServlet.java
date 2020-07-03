@@ -117,12 +117,12 @@ public class MainServlet extends HttpServlet {
 	
 	private void addPatron(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String firstname = request.getParameter("fname");
-		String lastname = request.getParameter("lname");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		userdao.addPatron(firstname, lastname, username, password);
-		response.sendRedirect("PatronLogin");
+		response.sendRedirect("Login");
 		
 		
 	}
@@ -131,7 +131,7 @@ public class MainServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		librarianDao.addLibrarian(new Librarian(0, username, password));
-		response.sendRedirect("LibrarianLogin");
+		response.sendRedirect("Login");
 
 	
 	}
