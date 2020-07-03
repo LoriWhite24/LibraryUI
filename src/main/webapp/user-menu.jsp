@@ -30,9 +30,9 @@
 					
 					<td><c:out value="${ book.description }" /></td>
 					
-					<td><c:out value="${ book.rent }" /></td>
+					<td><c:out value="${ book.rented }" /></td>
 					
-					<td><c:out value="${ book.date }" /></td>
+					<td><c:out value="${ book.dateAddedLibrary }" /></td>
 					
 					<td><a class="btn btn-primary" href="edit?id=<c:out value='${ book.isbn }' />" >Checkout books</a>
 					<a class="btn btn-danger" href="delete?id=<c:out value='${ book.isbn }' />">Return book</a>
@@ -43,7 +43,7 @@
 	
 	</table>
 
-	<button class="btn btn-primary" type="button" href="<%= request.getContextPath() %>/">Check Out Book</button>
+	<button class="btn btn-primary" type="button" href="<%= request.getContextPath() %>/">Get User History</button>
 	
 </div>
 
